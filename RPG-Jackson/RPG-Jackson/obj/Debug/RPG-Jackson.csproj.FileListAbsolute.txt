@@ -1,0 +1,12 @@
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.exe.config
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.csprojResolveAssemblyReference.cache
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPD\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.exe.config
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\bin\Debug\RPG-Jackson.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\RPG-Jackson\RPG-Jackson\obj\Debug\RPG-Jackson.csprojResolveAssemblyReference.cache
