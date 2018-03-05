@@ -1,0 +1,7 @@
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\bin\Debug\Schrege.exe.config
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\bin\Debug\Schrege.exe
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\bin\Debug\Schrege.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\obj\Debug\Schrege.csprojResolveAssemblyReference.cache
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\obj\Debug\Schrege.csproj.CoreCompileInputs.cache
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\obj\Debug\Schrege.exe
+C:\Users\Michal\Documents\GitHub\SPD\Schrege\obj\Debug\Schrege.pdb
