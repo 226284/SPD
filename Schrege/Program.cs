@@ -15,13 +15,13 @@ namespace Schrege
             File file = new File();
             file.listOfTasks = new List<Task>();
 
-            int r, p;
+            int r, p, q;
 
 
                 try
                 {
                     //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                    using (StreamReader sr = new StreamReader("JACK5.DAT"))
+                    using (StreamReader sr = new StreamReader("SCHRAGE1.DAT"))
                     {
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
@@ -32,8 +32,9 @@ namespace Schrege
 
                             r = int.Parse(bits[0]);
                             p = int.Parse(bits[1]);
+                            q = int.Parse(bits[2]);
 
-                            Task task = new Task(r, p);
+                            Task task = new Task(r, p, q);
 
                             file.listOfTasks.Add(task);
 
@@ -42,10 +43,10 @@ namespace Schrege
 
                         foreach (Task t in file.listOfTasks)
                         {
-                            Console.WriteLine(t.r.ToString() + " " + t.p.ToString());
+                            Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
 
                         }
-                        List<Task> sortedList = file.listOfTasks.OrderBy(o => o.r).ToList();
+                        /*List<Task> sortedList = file.listOfTasks.OrderBy(o => o.r).ToList();
 
                         Console.WriteLine("Posortowane:");
 
@@ -64,9 +65,9 @@ namespace Schrege
                             cFirst = cNext;
                             Console.WriteLine(cNext);
                         }
-
+                    
                     Console.WriteLine("Czas trwania:");
-                    Console.WriteLine(cNext);
+                    Console.WriteLine(cNext);*/
                     }
                 }
                 catch (Exception e)

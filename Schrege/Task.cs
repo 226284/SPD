@@ -9,14 +9,16 @@ namespace Schrege
     class Task
     {
 
-        public int r;
-        public int p;
+        public int r; //termin dostępności
+        public int p; //czas obsługi
+        public int q; //czas dostarczenia
 
 
-        public Task(int R, int P)
+        public Task(int R, int P, int Q)
         {
             r = R;
             p = P;
+            q = Q;
         }
     }
 }
