@@ -46,21 +46,50 @@ namespace Schrege
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
 
                         }
-                        /*List<Task> sortedList = file.listOfTasks.OrderBy(o => o.r).ToList();
+
+                        List<Task> sortedList = file.listOfTasks.OrderBy(o => o.r).ToList();
 
                         Console.WriteLine("Posortowane:");
 
                         foreach (Task t in sortedList)
                         {
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString());
-
                         }
 
-                        int cFirst = 0, cNext = 0;
+                    List<Task> N = file.listOfTasks;
 
-                        foreach (Task t in sortedList)
+                    List<Task> G = new List<Task>();
+
+                    int time = 0, step = 0, cMax = 0;
+                    
+                    while (G.Count != 0 || N.Count != 0)
+                    {
+                        do
                         {
+                            while (N.Count != 0 && N.Min(c => c.r) <= time)
+                            {
+                                //Console.WriteLine("dddd"+ N.Min().ToString());
+                                //Console.ReadLine();
+                                G.Add(N.Min());
+                                N.Remove(N.Min());
 
+                            }
+
+                            if (G.Count == 0)
+                            {
+                                time = N.Min().r;
+                            }
+                        } while (G.Count == 0);
+
+                        var x = G.Max();
+                        G.Remove(G.Max());
+
+                        step = step + 1;
+                        time = time + x.q;
+                    }
+
+                       /* foreach (Task t in sortedList)
+                        {
                             cNext = Math.Max(t.r, cFirst) + t.p;
                             cFirst = cNext;
                             Console.WriteLine(cNext);
@@ -69,6 +98,7 @@ namespace Schrege
                     Console.WriteLine("Czas trwania:");
                     Console.WriteLine(cNext);*/
                     }
+                
                 }
                 catch (Exception e)
                 {
