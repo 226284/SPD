@@ -41,6 +41,7 @@ namespace Schrege
                             //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
                         }
 
+
                         foreach (Task t in file.listOfTasks)
                         {
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
