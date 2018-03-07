@@ -21,7 +21,7 @@ namespace Schrege
                 try
                 {
                     //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                    using (StreamReader sr = new StreamReader("SCHRAGE1.DAT"))
+                    using (StreamReader sr = new StreamReader("SCHRAGE9.DAT"))
                     {
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
@@ -56,48 +56,70 @@ namespace Schrege
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString());
                         }
 
-                    List<Task> N = file.listOfTasks;
+                    List<Task> N = sortedList;
 
                     List<Task> G = new List<Task>();
 
-                    int time = 0, step = 0, cMax = 0;
-                    
+                    //List<Task> sortedNByMinR = sortedList;
+                    //List<Task> sortedGByMaxQ = G.OrderByDescending(o => o.q).ToList();
+
+                    int time = 0, step = 0, cMax = 0, tTemp = 0;
+                    Console.WriteLine("1");
                     while (G.Count != 0 || N.Count != 0)
                     {
-                        do
+                        Console.WriteLine("2");
+
+                        Label:
+                        while (N.Count != 0 && N.First().r <= time)
                         {
-                            while (N.Count != 0 && N.Min(c => c.r) <= time)
-                            {
-                                //Console.WriteLine("dddd"+ N.Min().ToString());
-                                //Console.ReadLine();
-                                G.Add(N.Min());
-                                N.Remove(N.Min());
+                            Console.WriteLine("3");
 
-                            }
+                            //Console.WriteLine("dddd"+ N.Min().ToString());
+                            //Console.ReadLine();
+                            G.Add(N.First());
+                            G = G.OrderByDescending(o => o.q).ToList();
 
-                            if (G.Count == 0)
-                            {
-                                time = N.Min().r;
-                            }
-                        } while (G.Count == 0);
+                            N.Remove(N.First());
+                            N = N.OrderBy(o => o.r).ToList();
+                        }
 
-                        var x = G.Max();
-                        G.Remove(G.Max());
+
+                        if (G.Count == 0)
+                        {
+                            time = N.First().r;
+                            goto Label;
+                        }
+
+                        Console.WriteLine("petla");
+                        Console.WriteLine("4");
+
+                        var x = G.First() ;
+                        Console.WriteLine("5");
+
+                        G.Remove(x);
+                        G = G.OrderByDescending(o => o.q).ToList();
 
                         step = step + 1;
-                        time = time + x.q;
+                        //tTemp = time;
+                        time = time + x.p;
+                        cMax = Math.Max(cMax, time + x.q);
                     }
 
-                       /* foreach (Task t in sortedList)
-                        {
-                            cNext = Math.Max(t.r, cFirst) + t.p;
-                            cFirst = cNext;
-                            Console.WriteLine(cNext);
-                        }
-                    
-                    Console.WriteLine("Czas trwania:");
-                    Console.WriteLine(cNext);*/
-                    }
+                    /* foreach (Task t in G)
+                     {
+                         c = Math.Max(t.r, cFirst) + t.p;
+                         cFirst = cNext;
+                         Console.WriteLine(cNext);
+                     }
+
+                 Console.WriteLine("Czas trwania:");
+                 Console.WriteLine(cNext);*/
+                    Console.WriteLine("6");
+
+                        Console.WriteLine("toooo:");
+
+                        Console.WriteLine(cMax);
+                }
                 
                 }
                 catch (Exception e)
