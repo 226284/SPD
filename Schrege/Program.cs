@@ -14,7 +14,8 @@ namespace Schrege
         static void Main(string[] args)
         {
             File file = new File();
-            file.listOfTasks = new List<Task>();
+            //file.listOfTasks = new List<Task>();
+            file.queueOfTasks = new SimplePriorityQueue<Task>();
 
             int r, p, q;
 
@@ -22,7 +23,7 @@ namespace Schrege
                 try
                 {
                     //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                    using (StreamReader sr = new StreamReader("SCHRAGE9.DAT"))
+                    using (StreamReader sr = new StreamReader("SCHRAGE1.DAT"))
                     {
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
@@ -37,19 +38,19 @@ namespace Schrege
 
                             Task task = new Task(r, p, q);
 
-                            file.listOfTasks.Add(task);
+                            file.queueOfTasks.Enqueue(task,j);
 
                             //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
                         }
 
 
-                        foreach (Task t in file.listOfTasks)
+                        foreach (Task t in file.queueOfTasks)
                         {
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
 
                         }
 
-                        List<Task> sortedList = file.listOfTasks.OrderBy(o => o.r).ToList();
+                        List<Task> sortedList = file.queueOfTasks.;
 
                         Console.WriteLine("Posortowane:");
 
