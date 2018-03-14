@@ -13,16 +13,21 @@ namespace Schrege
     {
         static void Main(string[] args)
         {
-            File file = new File();
-            file.listOfTasks = new List<Task>();
 
-            int r, p, q;
+            while (true)
+            {
+                File file = new File();
+                file.listOfTasks = new List<Task>();
 
+                int r, p, q;
+
+                Console.WriteLine("Nr bazy: ");
+                int liczba = Int32.Parse(Console.ReadLine());
 
                 try
                 {
                     //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                    using (StreamReader sr = new StreamReader("SCHRAGE9.DAT"))
+                    using (StreamReader sr = new StreamReader("SCHRAGE" + liczba + ".DAT"))
                     {
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
@@ -58,71 +63,71 @@ namespace Schrege
                             Console.WriteLine(t.r.ToString() + " " + t.p.ToString());
                         }
 
-                    List<Task> N = sortedList;
+                        List<Task> N = sortedList;
 
-                    List<Task> G = new List<Task>();
+                        List<Task> G = new List<Task>();
 
-                    //List<Task> sortedNByMinR = sortedList;
-                    //List<Task> sortedGByMaxQ = G.OrderByDescending(o => o.q).ToList();
+                        //List<Task> sortedNByMinR = sortedList;
+                        //List<Task> sortedGByMaxQ = G.OrderByDescending(o => o.q).ToList();
 
-                    int time = 0, step = 0, cMax = 0, tTemp = 0;
-                    Console.WriteLine("1");
-                    while (G.Count != 0 || N.Count != 0)
-                    {
-                        Console.WriteLine("2");
-
-                        Label:
-                        while (N.Count != 0 && N.First().r <= time)
+                        int time = 0, step = 0, cMax = 0, tTemp = 0;
+                        Console.WriteLine("1");
+                        while (G.Count != 0 || N.Count != 0)
                         {
-                            Console.WriteLine("3");
+                            Console.WriteLine("2");
 
-                            //Console.WriteLine("dddd"+ N.Min().ToString());
-                            //Console.ReadLine();
-                            G.Add(N.First());
-                            G = G.OrderByDescending(o => o.q).ToList();
+                            Label:
+                            while (N.Count != 0 && N.First().r <= time)
+                            {
+                                Console.WriteLine("3");
 
-                            N.Remove(N.First());
-                            N = N.OrderBy(o => o.r).ToList();
+                                //Console.WriteLine("dddd"+ N.Min().ToString());
+                                //Console.ReadLine();
+                                G.Add(N.First());
+                                G = G.OrderByDescending(o => o.q).ToList();
+
+                                N.Remove(N.First());
+                                //N = N.OrderBy(o => o.r).ToList();
+                            }
+
+
+                            if (G.Count == 0)
+                            {
+                                time = N.First().r;
+                                goto Label;
+                            }
+
+                            Console.WriteLine("petla");
+                            Console.WriteLine("4");
+
+                            var x = G.First();
+                            Console.WriteLine("5");
+
+                            G.Remove(x);
+                            //G = G.OrderByDescending(o => o.q).ToList();
+
+                            step = step + 1;
+                            //tTemp = time;
+                            time = time + x.p;
+                            cMax = Math.Max(cMax, time + x.q);
                         }
 
+                        /* foreach (Task t in G)
+                         {
+                             c = Math.Max(t.r, cFirst) + t.p;
+                             cFirst = cNext;
+                             Console.WriteLine(cNext);
+                         }
 
-                        if (G.Count == 0)
-                        {
-                            time = N.First().r;
-                            goto Label;
-                        }
-
-                        Console.WriteLine("petla");
-                        Console.WriteLine("4");
-
-                        var x = G.First() ;
-                        Console.WriteLine("5");
-
-                        G.Remove(x);
-                        G = G.OrderByDescending(o => o.q).ToList();
-
-                        step = step + 1;
-                        //tTemp = time;
-                        time = time + x.p;
-                        cMax = Math.Max(cMax, time + x.q);
-                    }
-
-                    /* foreach (Task t in G)
-                     {
-                         c = Math.Max(t.r, cFirst) + t.p;
-                         cFirst = cNext;
-                         Console.WriteLine(cNext);
-                     }
-
-                 Console.WriteLine("Czas trwania:");
-                 Console.WriteLine(cNext);*/
-                    Console.WriteLine("6");
+                     Console.WriteLine("Czas trwania:");
+                     Console.WriteLine(cNext);*/
+                        Console.WriteLine("6");
 
                         Console.WriteLine("toooo:");
 
                         Console.WriteLine(cMax);
-                }
-                
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -130,9 +135,9 @@ namespace Schrege
                     Console.WriteLine(e.Message);
                 }
 
-            Console.ReadLine();
+                Console.ReadLine();
+            }
+
         }
-
-
     }
 }
