@@ -10,8 +10,8 @@ namespace Schrege
     class File
     {
         public int numberOfTasks;
-        //public List<Task> listOfTasks;
-        public SimplePriorityQueue<Task> queueOfTasks;
+        public List<Task> listOfTasks;
+        //public SimplePriorityQueue<Task> queueOfTasks;
         //public void Segregation()
         //{
         //    foreach(Task t in listOfTasks)

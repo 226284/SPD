@@ -14,57 +14,46 @@ namespace Schrege
         static void Main(string[] args)
         {
             File file = new File();
-            //file.listOfTasks = new List<Task>();
-            file.queueOfTasks = new SimplePriorityQueue<Task>();
+            file.listOfTasks = new List<Task>();
 
             int r, p, q;
 
 
-                try
+            try
+            {
+                using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
+                //using (StreamReader sr = new StreamReader("SCHRAGE7.DAT"))
                 {
-                    //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                    using (StreamReader sr = new StreamReader("SCHRAGE1.DAT"))
+                    file.numberOfTasks = Int32.Parse(sr.ReadLine());
+
+                    for (int j = 0; j < file.numberOfTasks; j++)
                     {
-                        file.numberOfTasks = Int32.Parse(sr.ReadLine());
+                        string text = sr.ReadLine();
+                        string[] bits = text.Split(' ');
 
-                        for (int j = 0; j < file.numberOfTasks; j++)
-                        {
-                            string text = sr.ReadLine();
-                            string[] bits = text.Split(' ');
+                        r = int.Parse(bits[0]);
+                        p = int.Parse(bits[1]);
+                        q = int.Parse(bits[2]);
 
-                            r = int.Parse(bits[0]);
-                            p = int.Parse(bits[1]);
-                            q = int.Parse(bits[2]);
+                        Task task = new Task(r, p, q);
 
-                            Task task = new Task(r, p, q);
+                        file.listOfTasks.Add(task);
+                        //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
+                    }
 
-                            file.queueOfTasks.Enqueue(task,j);
+                    SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
+                    SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
 
-                            //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
-                        }
+                    foreach (Task t in file.listOfTasks)
+                    {
+                        Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
+                    }
 
-
-                        foreach (Task t in file.queueOfTasks)
-                        {
-                            Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
-
-                        }
-
-                        List<Task> sortedList = file.queueOfTasks.;
-
-                        Console.WriteLine("Posortowane:");
-
-                        foreach (Task t in sortedList)
-                        {
-                            Console.WriteLine(t.r.ToString() + " " + t.p.ToString());
-                        }
-
-                    List<Task> N = sortedList;
-
-                    List<Task> G = new List<Task>();
-
-                    //List<Task> sortedNByMinR = sortedList;
-                    //List<Task> sortedGByMaxQ = G.OrderByDescending(o => o.q).ToList();
+                    //przepisywanie zawartości
+                    foreach (Task t in file.listOfTasks)
+                    {
+                        N.Enqueue(t, t.r);
+                    }
 
                     int time = 0, step = 0, cMax = 0, tTemp = 0;
                     Console.WriteLine("1");
@@ -73,34 +62,27 @@ namespace Schrege
                         Console.WriteLine("2");
 
                         Label:
-                        while (N.Count != 0 && N.First().r <= time)
+                        while (N.Count != 0 && N.First.r <= time)
                         {
                             Console.WriteLine("3");
 
-                            //Console.WriteLine("dddd"+ N.Min().ToString());
-                            //Console.ReadLine();
-                            G.Add(N.First());
-                            G = G.OrderByDescending(o => o.q).ToList();
-
-                            N.Remove(N.First());
-                            N = N.OrderBy(o => o.r).ToList();
+                            var tmp = N.Dequeue();
+                            G.Enqueue(tmp, tmp.q);
                         }
-
 
                         if (G.Count == 0)
                         {
-                            time = N.First().r;
+                            time = N.First.r;
                             goto Label;
                         }
 
                         Console.WriteLine("petla");
                         Console.WriteLine("4");
 
-                        var x = G.First() ;
+                        var x = G.First;
                         Console.WriteLine("5");
 
-                        G.Remove(x);
-                        G = G.OrderByDescending(o => o.q).ToList();
+                        G.Dequeue();
 
                         step = step + 1;
                         //tTemp = time;
@@ -108,28 +90,19 @@ namespace Schrege
                         cMax = Math.Max(cMax, time + x.q);
                     }
 
-                    /* foreach (Task t in G)
-                     {
-                         c = Math.Max(t.r, cFirst) + t.p;
-                         cFirst = cNext;
-                         Console.WriteLine(cNext);
-                     }
-
-                 Console.WriteLine("Czas trwania:");
-                 Console.WriteLine(cNext);*/
                     Console.WriteLine("6");
 
-                        Console.WriteLine("toooo:");
+                    Console.WriteLine("toooo:");
 
-                        Console.WriteLine(cMax);
+                    Console.WriteLine(cMax);
                 }
-                
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Problem z odczytaniem pliku");
-                    Console.WriteLine(e.Message);
-                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Problem z odczytaniem pliku");
+                Console.WriteLine(e.Message);
+            }
 
             Console.ReadLine();
         }
