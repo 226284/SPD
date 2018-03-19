@@ -21,8 +21,8 @@ namespace Schrege
 
             try
             {
-                using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                //using (StreamReader sr = new StreamReader("SCHRAGE7.DAT"))
+                //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
+                using (StreamReader sr = new StreamReader("SCHRAGE7.DAT"))
                 {
                     file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
