@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schrage", "Schrage\Schrage.csproj", "{631C0EC0-2967-44C0-BDB6-2C14BBA14AE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{631C0EC0-2967-44C0-BDB6-2C14BBA14AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{631C0EC0-2967-44C0-BDB6-2C14BBA14AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{631C0EC0-2967-44C0-BDB6-2C14BBA14AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{631C0EC0-2967-44C0-BDB6-2C14BBA14AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6EBC695-DC1B-4E7D-A8B1-0C7AC7C779F4}
+	EndGlobalSection
+EndGlobal
