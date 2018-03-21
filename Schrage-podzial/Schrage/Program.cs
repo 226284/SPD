@@ -15,12 +15,14 @@ namespace Schrage
         {
 
             while (true)
-            {
+            {//tworzenie obiektu typu plik
                 File file = new File();
+                //deklaracja listy
                 file.listOfTasks = new List<Task>();
-
+                //zmienne tymczasowe r,p,q
                 int r, p, q;
 
+                //wczytywanie bazy z pliku
                 Console.WriteLine("Nr bazy: ");
                 int liczba = Int32.Parse(Console.ReadLine());
 
@@ -31,6 +33,7 @@ namespace Schrage
                     {
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
+                        //petla for, wykowyuje się tyle razy ile jest wszystkich zadan
                     for (int j = 0; j < file.numberOfTasks; j++)
                     {
                         string text = sr.ReadLine();
@@ -46,8 +49,11 @@ namespace Schrage
                         //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
                     }
 
+                    //deklaracja kolejki zadan nieuszeregowanych
                     SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
+                    //deklaracja kolejki zadan gotowych
                     SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
+                        
 
                     foreach (Task t in file.listOfTasks)
                     {
@@ -60,7 +66,9 @@ namespace Schrage
                         N.Enqueue(t, t.r);
                     }
 
-                    int time = 0, step = 0, cMax = 0, tTemp = 0;
+                        int time = 0, step = 0, cMax = 0;
+                        Task l = new Task(0, 0, 0);
+
                     Console.WriteLine("1");
                     while (G.Count != 0 || N.Count != 0)
                     {
@@ -72,8 +80,18 @@ namespace Schrage
                             Console.WriteLine("3");
 
                             var tmp = N.Dequeue();
-                            G.Enqueue(tmp, tmp.q);
-                        }
+                                G.Enqueue(tmp, tmp.q);
+                                if (tmp.q > l.q)
+                                {
+                                    l.p = time - tmp.r;
+                                    time = tmp.r;
+                                    if (l.p > 0)
+                                    {
+                                        G.Enqueue(l,l.r);
+                                    }
+                                }
+         
+                            }
 
                         if (G.Count == 0)
                         {

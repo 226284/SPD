@@ -1,0 +1,10 @@
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Schrage.exe.config
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Schrage.exe
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Schrage.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Priority Queue.dll
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Priority Queue.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\bin\Debug\Priority Queue.xml
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\obj\Debug\Schrage-podzial.csproj.CoreCompileInputs.cache
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\obj\Debug\Schrage.exe
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\obj\Debug\Schrage.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Schrage-podzial\Schrage\obj\Debug\Schrage-podzial.csprojResolveAssemblyReference.cache
