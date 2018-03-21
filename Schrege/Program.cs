@@ -13,18 +13,23 @@ namespace Schrege
     {
         static void Main(string[] args)
         {
-            File file = new File();
-            file.listOfTasks = new List<Task>();
 
-            int r, p, q;
-
-
-            try
+            while (true)
             {
-                //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
-                using (StreamReader sr = new StreamReader("SCHRAGE7.DAT"))
+                File file = new File();
+                file.listOfTasks = new List<Task>();
+
+                int r, p, q;
+
+                Console.WriteLine("Nr bazy: ");
+                int liczba = Int32.Parse(Console.ReadLine());
+
+                try
                 {
-                    file.numberOfTasks = Int32.Parse(sr.ReadLine());
+                    //using (StreamReader sr = new StreamReader("JACK" + i.ToString() + ".DAT"))
+                    using (StreamReader sr = new StreamReader("SCHRAGE" + liczba + ".DAT"))
+                    {
+                        file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
                     for (int j = 0; j < file.numberOfTasks; j++)
                     {
@@ -76,19 +81,19 @@ namespace Schrege
                             goto Label;
                         }
 
-                        Console.WriteLine("petla");
-                        Console.WriteLine("4");
+                            Console.WriteLine("petla");
+                            Console.WriteLine("4");
 
                         var x = G.First;
                         Console.WriteLine("5");
 
                         G.Dequeue();
 
-                        step = step + 1;
-                        //tTemp = time;
-                        time = time + x.p;
-                        cMax = Math.Max(cMax, time + x.q);
-                    }
+                            step = step + 1;
+                            //tTemp = time;
+                            time = time + x.p;
+                            cMax = Math.Max(cMax, time + x.q);
+                        }
 
                     Console.WriteLine("6");
 
@@ -104,9 +109,9 @@ namespace Schrege
                 Console.WriteLine(e.Message);
             }
 
-            Console.ReadLine();
+                Console.ReadLine();
+            }
+
         }
-
-
     }
 }
