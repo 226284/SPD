@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Priority_Queue;
 
-namespace Schrege
+namespace Schrage
 {
     class File
     {
