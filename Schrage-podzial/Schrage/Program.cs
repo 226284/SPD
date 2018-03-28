@@ -34,98 +34,104 @@ namespace Schrage
                         file.numberOfTasks = Int32.Parse(sr.ReadLine());
 
                         //petla for, wykowyuje się tyle razy ile jest wszystkich zadan
-                    for (int j = 0; j < file.numberOfTasks; j++)
-                    {
-                        string text = sr.ReadLine();
-                        string[] bits = text.Split(' ');
+                        for (int j = 0; j < file.numberOfTasks; j++)
+                        {
+                            string text = sr.ReadLine();
+                            string[] bits = text.Split(' ');
 
-                        r = int.Parse(bits[0]);
-                        p = int.Parse(bits[1]);
-                        q = int.Parse(bits[2]);
+                            r = int.Parse(bits[0]);
+                            p = int.Parse(bits[1]);
+                            q = int.Parse(bits[2]);
 
-                        Task task = new Task(r, p, q);
+                            Task task = new Task(r, p, q);
 
-                        file.listOfTasks.Add(task);
-                        //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
-                    }
+                            file.listOfTasks.Add(task);
+                            //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
+                        }
 
-                    //deklaracja kolejki zadan nieuszeregowanych
-                    SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
-                    //deklaracja kolejki zadan gotowych
-                    SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
-                        
+                        //deklaracja kolejki zadan nieuszeregowanych
+                        SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
+                        //deklaracja kolejki zadan gotowych
+                        SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
 
-                    foreach (Task t in file.listOfTasks)
-                    {
-                        Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
-                    }
 
-                    //przepisywanie zawartości
-                    foreach (Task t in file.listOfTasks)
-                    {
-                        N.Enqueue(t, t.r);
-                    }
+                        foreach (Task t in file.listOfTasks)
+                        {
+                            Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
+                        }
 
+                        //przepisywanie zawartości
+                        foreach (Task t in file.listOfTasks)
+                        {
+                            N.Enqueue(t, t.r);
+                        }
+
+
+                        //inicjacja wszystkich zmiennych
                         int time = 0, step = 0, cMax = 0;
+                        Task e = new Task(0, 0, 0);
                         Task l = new Task(0, 0, 0);
 
-                    Console.WriteLine("1");
-                    while (G.Count != 0 || N.Count != 0)
-                    {
-                        Console.WriteLine("2");
-
-                        Label:
-                        while (N.Count != 0 && N.First.r <= time)
+                        while (G.Count != 0 || N.Count != 0)
                         {
-                            Console.WriteLine("3");
 
-                            var tmp = N.Dequeue();
-                                G.Enqueue(tmp, tmp.q);
-                                if (tmp.q > l.q)
+
+                            Label:
+                            while (N.Count != 0 && N.First.r <= time)
+                            {
+
+
+                                e = N.First;
+                                G.Enqueue(e, e.q);
+                                // G.Enqueue(e, e.r);
+                                N.Dequeue();
+                                if (e.q > l.q)
                                 {
-                                    l.p = time - tmp.r;
-                                    time = tmp.r;
+                                    l.p = time - e.r;
+                                    time = e.r;
                                     if (l.p > 0)
                                     {
-                                        G.Enqueue(l,l.r);
+                                        //G.Enqueue(l, l.r);
+                                        G.Enqueue(l, l.q);
                                     }
                                 }
-         
+
                             }
 
-                        if (G.Count == 0)
-                        {
-                            time = N.First.r;
-                            goto Label;
-                        }
+                            if (G.Count == 0)
+                            {
+                                time = N.First.r;
+                                goto Label;
+                            }
 
-                            Console.WriteLine("petla");
-                            Console.WriteLine("4");
+                            //var x = G.First;
+                            e = G.First;
 
-                        var x = G.First;
-                        Console.WriteLine("5");
+                            //Console.WriteLine("G: " + G.First.q);
+                            //Console.WriteLine("N: " + N.First.r);
 
-                        G.Dequeue();
+                            G.Dequeue();
 
                             step = step + 1;
+                            l = e;
                             //tTemp = time;
-                            time = time + x.p;
-                            cMax = Math.Max(cMax, time + x.q);
+                            time = time + e.p;
+                            cMax = Math.Max(cMax, time + e.q);
                         }
 
-                    Console.WriteLine("6");
 
-                    Console.WriteLine("toooo:");
 
-                    Console.WriteLine(cMax);
+                        Console.WriteLine("toooo:");
+
+                        Console.WriteLine(cMax);
+                    }
+
                 }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Problem z odczytaniem pliku");
-                Console.WriteLine(e.Message);
-            }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Problem z odczytaniem pliku");
+                    Console.WriteLine(e.Message);
+                }
 
                 Console.ReadLine();
             }
