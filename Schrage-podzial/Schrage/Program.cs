@@ -75,15 +75,12 @@ namespace Schrage
                         while (G.Count != 0 || N.Count != 0)
                         {
 
-
                             Label:
                             while (N.Count != 0 && N.First.r <= time)
                             {
 
-
                                 e = N.First;
                                 G.Enqueue(e, e.q);
-                                // G.Enqueue(e, e.r);
                                 N.Dequeue();
                                 if (e.q > l.q)
                                 {
@@ -91,7 +88,6 @@ namespace Schrage
                                     time = e.r;
                                     if (l.p > 0)
                                     {
-                                        //G.Enqueue(l, l.r);
                                         G.Enqueue(l, l.q);
                                     }
                                 }
@@ -104,7 +100,6 @@ namespace Schrage
                                 goto Label;
                             }
 
-                            //var x = G.First;
                             e = G.First;
 
                             //Console.WriteLine("G: " + G.First.q);

@@ -7,3 +7,4 @@ C:\Users\Michal\Documents\GitHub\SPD\Schrage\Schrage\bin\Debug\Priority Queue.pd
 C:\Users\Michal\Documents\GitHub\SPD\Schrage\Schrage\bin\Debug\Priority Queue.xml
 C:\Users\Michal\Documents\GitHub\SPD\Schrage\Schrage\obj\Debug\Schrage.exe
 C:\Users\Michal\Documents\GitHub\SPD\Schrage\Schrage\obj\Debug\Schrage.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Schrage\Schrage\obj\Debug\Schrage.csprojResolveAssemblyReference.cache
