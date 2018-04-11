@@ -48,7 +48,16 @@ namespace Schrage
                             //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());
                         }
 
-                        schrage.Schrage_run(file);
+                        // carlier algorithm
+
+                        int UB = 1000000, U;
+                        U = schrage.Schrage_run(file, UB);
+
+                        if (U < UB)
+                        {
+                            UB = U;
+                            // pi* = pi
+                        }
 
                         Console.WriteLine("a: " + schrage.a + "   b: " + schrage.b + "   c: " + schrage.c);
                     }

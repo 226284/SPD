@@ -1,0 +1,10 @@
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.csprojResolveAssemblyReference.cache
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.csproj.CoreCompileInputs.cache
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Carlier.exe.config
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Carlier.exe
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Carlier.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.dll
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.xml
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.exe
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.pdb

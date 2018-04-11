@@ -5,30 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Schrage
+namespace Carlier
 {
     class Schrage
     {
-        public int a { get; set; }
-        public int b { get; set; }
-        public int c { get; set; }
+        public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
+        public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
 
-        SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
-        SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
-
-        public int Schrage_run(File file, int U)
+        public Schrage(File file)
         {
-            foreach (Task t in file.listOfTasks)
-            {
-                Console.WriteLine(t.r.ToString() + " " + t.p.ToString() + " " + t.q.ToString());
-            }
-
-            //przepisywanie zawartości
-            foreach (Task t in file.listOfTasks)
+            foreach (var t in file.N)
             {
                 N.Enqueue(t, t.r);
             }
+        }
 
+        public int SchrageRun()
+        {
+            //N = file.N;
             int time = 0, step = 0, cMax = 0, tTemp = 0;
             while (G.Count != 0 || N.Count != 0)
             {
@@ -54,17 +48,7 @@ namespace Schrage
                 time = time + x.p;
                 cMax = Math.Max(cMax, time + x.q);
 
-                if (U <= time + x.q)
-                {
-                    cMax = time + x.q;
-                    b = step;
-                }
             }
-
-            Console.WriteLine("toooo:");
-
-            Console.WriteLine(cMax);
-
             return cMax;
         }
     }
