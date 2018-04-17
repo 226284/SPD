@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carlier.cs" />
     <Compile Include="File.cs" />
     <Compile Include="PreSchrage.cs" />
     <Compile Include="Program.cs" />

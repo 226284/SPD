@@ -10,17 +10,11 @@ namespace Carlier
     {
         static void Main(string[] args)
         {
-            File file = new File();
-            Schrage schrage = new Schrage(file);
-            PreSchrage preSchrage = new PreSchrage(file);
-            int a, b, c;
-            int U, LB, UB;
+            Carlier carlier = new Carlier();
 
-            //Console.WriteLine(schrage.SchrageRun());
-            //Console.WriteLine(preSchrage.PreSchrageRun());
-            //Console.ReadKey();
+            carlier.Carlier_Run();
 
-            U = schrage.SchrageRun(); //permutacja pi
+            Console.ReadKey();
         }
     }
 }
