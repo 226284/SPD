@@ -1,0 +1,7 @@
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\obj\Debug\NEH.csprojResolveAssemblyReference.cache
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\obj\Debug\NEH.csproj.CoreCompileInputs.cache
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\bin\Debug\NEH.exe.config
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\bin\Debug\NEH.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\bin\Debug\NEH.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\obj\Debug\NEH.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\NEH\NEH\obj\Debug\NEH.pdb
