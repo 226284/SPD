@@ -13,7 +13,6 @@ namespace NEH
             {//tworzenie obiektu typu plik
                 File file = new File();
                 //deklaracja listy
-                List<int> listOfTaskSum = new List<int>();
                 //wczytywanie bazy z pliku
                 Console.WriteLine("Nr bazy: ");
                 int liczba = Int32.Parse(Console.ReadLine());
@@ -27,11 +26,10 @@ namespace NEH
                         file.numberOfTasks = Int32.Parse(bitsTmp[0]);
                         file.numberOfMachines = Int32.Parse(bitsTmp[1]);
 
-                   //     int[,] taskMachinesTimes = new int[file.numberOfMachines+1, file.numberOfTasks+1];
                         Task[] tabOfTasks = new Task[file.numberOfTasks + 1];
-                        //Stworzyć dwie tablice jednowyiarowe
+      //              Task[] listOfTaskSum = new Task[];
 
-                        for (int j = 0; j < file.numberOfTasks + 1; j++)
+                    for (int j = 0; j < file.numberOfTasks + 1; j++)
                         {
                         Task task = new Task() { id = j, TimeOnMachineTab = new int[file.numberOfMachines + 1] };
                            tabOfTasks[j] = task ;
@@ -41,7 +39,6 @@ namespace NEH
                         for (int k = 0; k < file.numberOfMachines + 1; k++)
                         {
                             tabOfTasks[0].TimeOnMachineTab[k] = 0;
-                      //      taskMachinesTimes[k, 0] = 0;
                         }
 
 
@@ -53,48 +50,50 @@ namespace NEH
 
                             for(int k = 0; k < file.numberOfMachines; k++)
                             {
-                        //        taskMachinesTimes[k+1, j+1] = Int32.Parse(bits[k]);
                                 tabOfTasks[j+1].TimeOnMachineTab[k+1] = Int32.Parse(bits[k]);
                             }
                         }
 
-                        int C = 0;
-                        int sum = 0;
+                    int C = 0;
+                    int[] sum = new int[file.numberOfTasks + 1];
                       //posortować zadania od najwiekszej sumy czasu wykonywania zadań dla każdej maszyny
                       //i tak jak na fotce
                         for (int j = 1; j < file.numberOfTasks + 1; j++)
                         {
                             for (int k = 1; k < file.numberOfMachines + 1; k++)
                             {
-                        //        C = Math.Max(taskMachinesTimes[k, j - 1], taskMachinesTimes[k - 1, j]) + taskMachinesTimes[k, j];
-                      //          sum += taskMachinesTimes[k, j];
-                     //       Console.WriteLine(taskMachinesTimes[k, j]);
-                            Console.WriteLine(tabOfTasks[j].TimeOnMachineTab[k]);
+                                     sum[j] += tabOfTasks[j].TimeOnMachineTab[k];
+                            //Console.Write(tabOfTasks[j].TimeOnMachineTab[k] + " ");
                             }
-                            listOfTaskSum.Add(sum);
-                            sum = 0;
-
                             Console.WriteLine();
                         }
-                        listOfTaskSum.Sort();
-                        listOfTaskSum.Reverse();
-                        int[] tabTaskSum = new int[listOfTaskSum.Count];
-                        int it = 0;
-                        foreach (var l in listOfTaskSum)
+                    Array.Sort(sum, tabOfTasks);
+                    Array.Reverse(tabOfTasks);
+                    foreach (var s in sum)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    foreach (var s in tabOfTasks)
+                    {
+                        Console.WriteLine(s.id);
+                    }
+
+                    Task[] taskTabTmp = new Task[file.numberOfTasks + 1];
+                    for (int x = 1; x < file.numberOfTasks + 1; x++)
+                    {
+                        for (int i = 0; i < x; i++)
                         {
-                            tabTaskSum[it] = l;
-                            Console.WriteLine(tabTaskSum[it]);
-                            it++;
+                            taskTabTmp[x] = tabOfTasks[i];
                         }
 
-                        for (int j = 1; j < file.numberOfTasks + 1; j++)
+                        for (int j = 1; j < x ; j++)
                         {
                             for (int k = 1; k < file.numberOfMachines + 1; k++)
                             {
-                         //       C = Math.Max(taskMachinesTimes[k, j - 1], taskMachinesTimes[k - 1, j]) + taskMachinesTimes[k, j];
+                                C = Math.Max(taskTabTmp[j - 1].TimeOnMachineTab[k], taskTabTmp[j].TimeOnMachineTab[k - 1]) + taskTabTmp[j].TimeOnMachineTab[k];
                             }
-                            Console.WriteLine();
                         }
+                    }
                         Console.WriteLine("Lista:");
 
                         Console.WriteLine("Wynik:");
