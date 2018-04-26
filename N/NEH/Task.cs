@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace NEH
 {
-    class File
+    public class Task
     {
-        public int numberOfTasks;
-        public int numberOfMachines;
-       // public List<int> listOfTasks;
+        public int id { get; set; }
+        public int[] TimeOnMachineTab { get; set; }
     }
 }
