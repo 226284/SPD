@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-
+using System.Collections;
 
 namespace NEH
 {
@@ -55,6 +55,8 @@ namespace NEH
                         }
 
                     int C = 0;
+                    //int Cprev = 0;
+                    int Cmax = 0;
                     int[] sum = new int[file.numberOfTasks + 1];
                       //posortować zadania od najwiekszej sumy czasu wykonywania zadań dla każdej maszyny
                       //i tak jak na fotce
@@ -78,26 +80,90 @@ namespace NEH
                         Console.WriteLine(s.id);
                     }
 
-                    Task[] taskTabTmp = new Task[file.numberOfTasks + 1];
-                    for (int x = 1; x < file.numberOfTasks + 1; x++)
-                    {
-                        for (int i = 0; i < x; i++)
-                        {
-                            taskTabTmp[x] = tabOfTasks[i];
-                        }
+                    ArrayList taskTabTmp = new ArrayList();
+                    Task tmp1;
+                    Task tmp2;
 
-                        for (int j = 1; j < x ; j++)
+                    int Cmax0 =0, Cmax1=0;
+                    //////WYBIERANIE z dwóch pierwszych zadań która kombinacja jest lepsza(ma krótsze cMax)
+                    taskTabTmp.Add(tabOfTasks[0]);
+                    taskTabTmp.Add(tabOfTasks[1]);
+                    for (int j = 1; j < 2; j++)
+                    {
+                        for (int k = 1; k < file.numberOfMachines + 1; k++)
                         {
-                            for (int k = 1; k < file.numberOfMachines + 1; k++)
+                            tmp1 = (Task)taskTabTmp[j - 1];
+                            tmp2 = (Task)taskTabTmp[j];
+                            C = C + Math.Max(tmp1.TimeOnMachineTab[k], tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
+                            Cmax = Math.Max(Cmax, C);
+                        }
+                        C = 0;
+                        Cmax0 = Cmax;
+                    }
+
+                    taskTabTmp[0] = tabOfTasks[1];
+                    taskTabTmp[1] = tabOfTasks[0];
+                    for (int j = 1; j < 2; j++)
+                    {
+                        for (int k = 1; k < file.numberOfMachines + 1; k++)
+                        {
+                            tmp1 = (Task)taskTabTmp[j - 1];
+                            tmp2 = (Task)taskTabTmp[j];
+                            C = C + Math.Max(tmp1.TimeOnMachineTab[k], tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
+                            Cmax = Math.Max(Cmax, C);
+                        }
+                        C = 0;
+                        Cmax1 = Cmax;
+                    }
+                    //Ostateczne wybranie
+                    if(Cmax0 > Cmax1)
+                    {
+                        taskTabTmp[0] = tabOfTasks[0];
+                        taskTabTmp[1] = tabOfTasks[1];
+                    }
+                    
+                    //Tutaj trzeba wsadzać kolejne zadanie kolejno na pierwsze,...,ostatnie miejsce w arrayList, i dla każdego sprawdzać Cmax. Na końcu należy wybrać i zapisać tę konfigurację
+                    // która daje najmniejsze Cmax. Tak aż do końca zadań. Ostatnie Cmax to będzie odpowiedź.
+                    for (int y = 2; y < file.numberOfTasks + 1; y++)
+                    {
+                        for (int x = 0; x <= taskTabTmp.Count; x++)
+                        {
+                            taskTabTmp.Insert(x, tabOfTasks[y]);
+
+                            for (int j = 1; j < file.numberOfTasks; j++)
                             {
-                                C = Math.Max(taskTabTmp[j - 1].TimeOnMachineTab[k], taskTabTmp[j].TimeOnMachineTab[k - 1]) + taskTabTmp[j].TimeOnMachineTab[k];
+                                if (taskTabTmp.Count<=j)
+                                {
+                                    break;
+                                }
+                                for (int k = 1; k < file.numberOfMachines + 1; k++)
+                                {
+                                    tmp1 = (Task)taskTabTmp[j - 1];
+                                    tmp2 = (Task)taskTabTmp[j];
+                                    C = C + Math.Max(tmp1.TimeOnMachineTab[k], tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
+                                    Cmax = Math.Max(Cmax, C);
+                                }
+                                C = 0;
                             }
+                            taskTabTmp.RemoveAt(x);
+                            //for (int i = 0; i < x; i++)
+                            //{
+                            //    taskTabTmp[x] = tabOfTasks[i];
+                            //}
+
+                            //for (int j = 1; j < x ; j++)
+                            //{
+                            //    for (int k = 1; k < file.numberOfMachines + 1; k++)
+                            //    {
+                            //        C = Math.Max(taskTabTmp[j - 1].TimeOnMachineTab[k], taskTabTmp[j].TimeOnMachineTab[k - 1]) + taskTabTmp[j].TimeOnMachineTab[k];
+                            //    }
+                            //}
                         }
                     }
-                        Console.WriteLine("Lista:");
+                    Console.WriteLine("Lista:");
 
                         Console.WriteLine("Wynik:");
-                        Console.WriteLine(C);
+                        Console.WriteLine(Cmax + " "+C);
 
 
                     }
