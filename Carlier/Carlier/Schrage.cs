@@ -12,6 +12,7 @@ namespace Carlier
         public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
         public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
         public int b;
+        public int c;
         public List<Task> Permutacje;
 
         public Schrage(File file)

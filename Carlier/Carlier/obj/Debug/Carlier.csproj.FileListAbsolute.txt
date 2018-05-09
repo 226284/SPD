@@ -8,3 +8,4 @@ C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.pd
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.xml
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.exe
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.csproj.CopyComplete
