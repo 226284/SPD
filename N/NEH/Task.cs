@@ -10,5 +10,6 @@ namespace NEH
     {
         public int id { get; set; }
         public int[] TimeOnMachineTab { get; set; }
+        public int[] StartOfTask { get; set; }
     }
 }
