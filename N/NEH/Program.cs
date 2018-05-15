@@ -18,8 +18,8 @@ namespace NEH
                 Console.WriteLine("Nr bazy: ");
                 int liczba = Int32.Parse(Console.ReadLine());
 
-                //try
-                //{
+                try
+                {
                     using (StreamReader sr = new StreamReader("NEH" + liczba + ".DAT"))
                     {
                         string tmp = sr.ReadLine();
@@ -28,7 +28,6 @@ namespace NEH
                         file.numberOfMachines = Int32.Parse(bitsTmp[1]);
 
                         Task[] tabOfTasks = new Task[file.numberOfTasks + 1];
-      //              Task[] listOfTaskSum = new Task[];
 
                     for (int j = 0; j < file.numberOfTasks + 1; j++)
                         {
@@ -56,17 +55,13 @@ namespace NEH
                         }
 
                     int C = 0;
-                    //int Cprev = 0;
                     int Cmax = 0;
                     int[] sum = new int[file.numberOfTasks + 1];
-                      //posortować zadania od najwiekszej sumy czasu wykonywania zadań dla każdej maszyny
-                      //i tak jak na fotce
                         for (int j = 1; j < file.numberOfTasks + 1; j++)
                         {
                             for (int k = 1; k < file.numberOfMachines + 1; k++)
                             {
                                      sum[j] += tabOfTasks[j].TimeOnMachineTab[k];
-                            //Console.Write(tabOfTasks[j].TimeOnMachineTab[k] + " ");
                             }
                             Console.WriteLine();
                         }
@@ -202,7 +197,6 @@ namespace NEH
                             {
                                 taskTabTmp.RemoveAt(x);
                                 taskTabTmp.Insert(cMinTmpTaskIndex, tabOfTasks[y]);
-                               // break;
                             }
                         }
                     }
@@ -212,19 +206,6 @@ namespace NEH
                         var ttmp = (Task)t;
                         Array.Clear(ttmp.StartOfTask, 0, ttmp.StartOfTask.Length);
                     }
-
-                    //taskTabTmp[1] = tabOfTasks.FirstOrDefault(i => i.id == 6);
-                    //taskTabTmp[2] = tabOfTasks.FirstOrDefault(i => i.id == 2);
-                    //taskTabTmp[3] = tabOfTasks.FirstOrDefault(i => i.id == 1);
-                    //taskTabTmp[4] = tabOfTasks.FirstOrDefault(i => i.id == 4);
-                    //taskTabTmp[5] = tabOfTasks.FirstOrDefault(i => i.id == 7);
-                    //taskTabTmp[6] = tabOfTasks.FirstOrDefault(i => i.id == 9);
-                    //taskTabTmp[7] = tabOfTasks.FirstOrDefault(i => i.id == 3);
-                    //taskTabTmp[8] = tabOfTasks.FirstOrDefault(i => i.id == 8);
-                    //taskTabTmp[9] = tabOfTasks.FirstOrDefault(i => i.id == 5);
-                    //taskTabTmp[10] = tabOfTasks.FirstOrDefault(i => i.id == 10);
-
-
 
                     for (int j = 1; j < file.numberOfTasks + 1; j++)
                     {
@@ -253,13 +234,13 @@ namespace NEH
                     Console.WriteLine("Wynik:");
                         Console.WriteLine(Cmax + " "+C + " ");
                     }
-                //}
-                //catch (Exception e)
-                //{
-                //    Console.WriteLine("Problem z odczytaniem pliku");
-                //    Console.WriteLine(e.Message);
-                //}
-                Console.ReadLine();
+            }
+                catch (Exception e)
+            {
+                Console.WriteLine("Problem z odczytaniem pliku");
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadLine();
             }
         }
     }
