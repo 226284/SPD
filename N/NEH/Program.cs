@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace NEH
 {
@@ -87,7 +88,7 @@ namespace NEH
                     int cMinTmpTaskIndex = 0;
                     int cMinTmp = 0;
 
-                    int cMin0 =0, cMin1=0,cMin=0;
+                    int cMax0 =0, cMax1=0,cMax=0;
 
                     //////WYBIERANIE z dwóch pierwszych zadań która kombinacja jest lepsza(ma krótsze cMax)
                     taskTabTmp.Add(tabOfTasks[tabOfTasks.Length - 1]);
@@ -99,15 +100,15 @@ namespace NEH
                         {
                             tmp1 = (Task)taskTabTmp[j - 1];
                             tmp2 = (Task)taskTabTmp[j];
-                            C = Math.Max(tmp1.StartOfTask[k] + tmp1.TimeOnMachineTab[k], tmp2.StartOfTask[k-1] + tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
-                            if (j < 2 && k < file.numberOfMachines + 1)
+                            C = Math.Max(tmp1.StartOfTask[k] + tmp1.TimeOnMachineTab[k], tmp2.StartOfTask[k - 1] + tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
+                            if (j < 2)
                             {
                                 tmp2.StartOfTask[k] = C - tmp2.TimeOnMachineTab[k];
                                 tmp3 = (Task)taskTabTmp[j + 1];
-                                tmp3.StartOfTask[k] = C;
+                                tmp3.StartOfTask[k] = Math.Max(C, tmp3.StartOfTask[k - 1] + tmp3.TimeOnMachineTab[k - 1]);
                             }
                         }
-                        cMin0 = C;
+                        cMax0 = C;
                     }
 
                     taskTabTmp[1] = tabOfTasks[1];
@@ -119,32 +120,33 @@ namespace NEH
                             tmp1 = (Task)taskTabTmp[j - 1];
                             tmp2 = (Task)taskTabTmp[j];
                             C = Math.Max(tmp1.StartOfTask[k] + tmp1.TimeOnMachineTab[k], tmp2.StartOfTask[k - 1] + tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
-                            if (j < 2 && k < file.numberOfMachines + 1)
+                            if (j < 2)
                             {
                                 tmp2.StartOfTask[k] = C - tmp2.TimeOnMachineTab[k];
                                 tmp3 = (Task)taskTabTmp[j + 1];
-                                tmp3.StartOfTask[k] = C;
+                                tmp3.StartOfTask[k] = Math.Max(C, tmp3.StartOfTask[k - 1] + tmp3.TimeOnMachineTab[k - 1]);
                             }
                         }
-                        cMin1 = C;
+                        cMax1 = C;
                     }
 
-                    cMin = cMin1;
+                    cMax = cMax1;
                     //Ostateczne wybranie
-                    if(cMin0 < cMin1)
+                    if(cMax0 < cMax1)
                     {
-                        taskTabTmp[0] = tabOfTasks[0];
-                        taskTabTmp[1] = tabOfTasks[1];
-                        cMin = cMin0;
+                        taskTabTmp[1] = tabOfTasks[0];
+                        taskTabTmp[2] = tabOfTasks[1];
+                        cMax = cMax0;
                     }
 
                     var t1 = (Task)taskTabTmp[0];
                     var t2 = (Task)taskTabTmp[1];
-                    Console.WriteLine("PIerwszes zadanie:" + t1.id +" " + t2.id + " " + cMin);
+                    Console.WriteLine("PIerwszes zadanie:" + t1.id +" " + t2.id + " " + cMax);
 
                     int countTmp = 0;
-                    //Tutaj trzeba wsadzać kolejne zadanie kolejno na pierwsze,...,ostatnie miejsce w arrayList, i dla każdego sprawdzać Cmax. Na końcu należy wybrać i zapisać tę konfigurację
-                    // która daje najmniejsze Cmax. Tak aż do końca zadań. Ostatnie Cmax to będzie odpowiedź.
+
+                    int ind = 0;
+                    //właściwy ALGORYTM NEH
                     for (int y = 2; y < file.numberOfTasks; y++)
                     {
                         countTmp = taskTabTmp.Count;
@@ -157,22 +159,26 @@ namespace NEH
                                 var ttmp = (Task)t;
                                 Array.Clear(ttmp.StartOfTask, 0, ttmp.StartOfTask.Length);
                             }
-                            for (int j = 1; j < file.numberOfTasks + 1; j++)
+                            ind = 0;
+                            //Zapisanie startu zadań dla wszystkich zadań na pierwszej masyznie
+                            foreach (var t in taskTabTmp)
                             {
-                                if (countTmp <= j)
-                                {
-                                    break;
-                                }
+                                var tt = (Task)t;
+                                tt.StartOfTask[1] = ind;
+                                ind += tt.TimeOnMachineTab[1];
+                            }
+                            for (int j = 1; j < countTmp + 1; j++)
+                            {
                                 for (int k = 1; k < file.numberOfMachines + 1; k++)
                                 {
                                     tmp1 = (Task)taskTabTmp[j - 1];
                                     tmp2 = (Task)taskTabTmp[j];
                                     C = Math.Max(tmp1.StartOfTask[k] + tmp1.TimeOnMachineTab[k], tmp2.StartOfTask[k - 1] + tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
-                                    if (j < file.numberOfTasks && k < file.numberOfMachines + 1)
+                                    if (j < countTmp)
                                     {
                                         tmp2.StartOfTask[k] = C - tmp2.TimeOnMachineTab[k];
                                         tmp3 = (Task)taskTabTmp[j + 1];
-                                        tmp3.StartOfTask[k] = C;
+                                        tmp3.StartOfTask[k] = Math.Max(C, tmp3.StartOfTask[k - 1] + tmp3.TimeOnMachineTab[k - 1]);
                                     }
                                 }
                             }
@@ -206,6 +212,20 @@ namespace NEH
                         var ttmp = (Task)t;
                         Array.Clear(ttmp.StartOfTask, 0, ttmp.StartOfTask.Length);
                     }
+
+                    //taskTabTmp[1] = tabOfTasks.FirstOrDefault(i => i.id == 6);
+                    //taskTabTmp[2] = tabOfTasks.FirstOrDefault(i => i.id == 2);
+                    //taskTabTmp[3] = tabOfTasks.FirstOrDefault(i => i.id == 1);
+                    //taskTabTmp[4] = tabOfTasks.FirstOrDefault(i => i.id == 4);
+                    //taskTabTmp[5] = tabOfTasks.FirstOrDefault(i => i.id == 7);
+                    //taskTabTmp[6] = tabOfTasks.FirstOrDefault(i => i.id == 9);
+                    //taskTabTmp[7] = tabOfTasks.FirstOrDefault(i => i.id == 3);
+                    //taskTabTmp[8] = tabOfTasks.FirstOrDefault(i => i.id == 8);
+                    //taskTabTmp[9] = tabOfTasks.FirstOrDefault(i => i.id == 5);
+                    //taskTabTmp[10] = tabOfTasks.FirstOrDefault(i => i.id == 10);
+
+
+
                     for (int j = 1; j < file.numberOfTasks + 1; j++)
                     {
                         for (int k = 1; k < file.numberOfMachines + 1; k++)
@@ -213,17 +233,24 @@ namespace NEH
                             tmp1 = (Task)taskTabTmp[j - 1];
                             tmp2 = (Task)taskTabTmp[j];
                             C = Math.Max(tmp1.StartOfTask[k] + tmp1.TimeOnMachineTab[k], tmp2.StartOfTask[k - 1] + tmp2.TimeOnMachineTab[k - 1]) + tmp2.TimeOnMachineTab[k];
-                            if (j < file.numberOfTasks && k < file.numberOfMachines + 1)
+                            if (j < file.numberOfTasks)
                             {
                                 tmp2.StartOfTask[k] = C - tmp2.TimeOnMachineTab[k];
                                 tmp3 = (Task)taskTabTmp[j + 1];
-                                tmp3.StartOfTask[k] = C;
+                                tmp3.StartOfTask[k] = Math.Max(C,tmp3.StartOfTask[k-1]+tmp3.TimeOnMachineTab[k-1]);
                             }
                         }
                     }
+
                     Console.WriteLine("Lista:");
 
-                        Console.WriteLine("Wynik:");
+                    foreach (var t in taskTabTmp)
+                    {
+                        var ttmp = (Task)t;
+                        Console.WriteLine(ttmp.id);
+                    }
+
+                    Console.WriteLine("Wynik:");
                         Console.WriteLine(Cmax + " "+C + " ");
                     }
                 //}
