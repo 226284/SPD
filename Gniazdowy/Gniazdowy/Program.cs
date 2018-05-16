@@ -77,10 +77,51 @@ namespace Gniazdowy
                     var permuttuans = file.Permutations;
 
 
-                    // Algorytm
+                    // Algorytm gniazdowy
+
+                    // wyznaczenie LP (złożność n^2 :/)
                     for (int i = 0; i < file.NumberOfOperations; i++)
                     {
-                        Array.BinarySearch(T, 1);
+                        for (int j = 0; j < file.NumberOfOperations; j++)
+                        {
+                            if (T[j] == (i + 1))
+                            {
+                                LP[i] = LP[i] + 1;
+                            }
+                            if (M[j] == i + 1)
+                            {
+                                LP[i] = LP[i] + 1;
+                            }
+                        }
+                    }
+
+                    // tworzenie kolejki
+                    List<Task> data = new List<Task>();
+
+                    int k = 0;
+                    int nominal = 0;
+
+                    while (k < file.NumberOfOperations)
+                    {
+                        if (LP[k] == 0)
+                        {
+                            Task tmpdata = new Task();
+                            tmpdata.start = nominal;
+                            tmpdata.stop = P[k] - nominal;
+                            data.Add(tmpdata);
+                        }
+
+                        if (LP[k] == 1)
+                        {
+
+                        }
+
+                        k++;
+                    }
+
+                    foreach (Task t in data)
+                    {
+                        Console.WriteLine(t.id.ToString() + ": " + t.start.ToString() + " " + t.stop.ToString());
                     }
                 }
 
