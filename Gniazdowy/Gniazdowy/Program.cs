@@ -21,61 +21,69 @@ namespace Gniazdowy
 
                 using (StreamReader sr = new StreamReader("data" + liczba + ".txt"))
                 {
-                        string tmp = sr.ReadLine();
-                        string[] bitsTmp = tmp.Split(' ');
-                        file.NumberOfOperations = Int32.Parse(bitsTmp[0]);
+                    string tmp = sr.ReadLine();
+                    string[] bitsTmp = tmp.Split(' ');
+                    file.NumberOfOperations = Int32.Parse(bitsTmp[0]);
 
-                        file.T = new int[file.NumberOfOperations];
-                        file.M = new int[file.NumberOfOperations];
-                        file.P = new int[file.NumberOfOperations];
+                    file.T = new int[file.NumberOfOperations];
+                    file.M = new int[file.NumberOfOperations];
+                    file.P = new int[file.NumberOfOperations];
+                    int[] LP = new int[file.NumberOfOperations];
 
-                        tmp = sr.ReadLine();
-                            bitsTmp = tmp.Split(' ');
-                        for (int j = 0; j < file.NumberOfOperations; j++)
-                        {
-                            //T
-                            file.T[j] = Int32.Parse(bitsTmp[j]);
-                        }
+                    tmp = sr.ReadLine();
+                    bitsTmp = tmp.Split(' ');
+                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    {
+                        //T
+                        file.T[j] = Int32.Parse(bitsTmp[j]);
+                    }
 
-                        tmp = sr.ReadLine();
-                            bitsTmp = tmp.Split(' ');
-                        for (int j = 0; j < file.NumberOfOperations; j++)
-                        {
-                            //M
-                            file.M[j] = Int32.Parse(bitsTmp[j]);
-                        }
+                    tmp = sr.ReadLine();
+                    bitsTmp = tmp.Split(' ');
+                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    {
+                        //M
+                        file.M[j] = Int32.Parse(bitsTmp[j]);
+                    }
 
-                        tmp = sr.ReadLine();
-                        bitsTmp = tmp.Split(' ');
-                        for (int j = 0; j < file.NumberOfOperations; j++)
-                        {
-                            //P
-                            file.P[j] = Int32.Parse(bitsTmp[j]);
+                    tmp = sr.ReadLine();
+                    bitsTmp = tmp.Split(' ');
+                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    {
+                        //P
+                        file.P[j] = Int32.Parse(bitsTmp[j]);
 
-                        }
+                    }
 
-                        //Liczba maszyn
-                        tmp = sr.ReadLine();
-                        bitsTmp = tmp.Split(' ');
-                        file.NumberOfMachines = Int32.Parse(bitsTmp[0]);
+                    //Liczba maszyn
+                    tmp = sr.ReadLine();
+                    bitsTmp = tmp.Split(' ');
+                    file.NumberOfMachines = Int32.Parse(bitsTmp[0]);
 
-                        file.Permutations = new int[file.NumberOfOperations + file.NumberOfMachines];
+                    file.Permutations = new int[file.NumberOfOperations + file.NumberOfMachines];
 
-                        tmp = sr.ReadLine();
-                        bitsTmp = tmp.Split(' ');
-                        for (int j = 0; j < file.NumberOfOperations + file.NumberOfMachines; j++)
-                        {
-                            //Permutacje
+                    tmp = sr.ReadLine();
+                    bitsTmp = tmp.Split(' ');
+                    for (int j = 0; j < file.NumberOfOperations + file.NumberOfMachines; j++)
+                    {
+                        //Permutacje
 
-                            file.Permutations[j] = Int32.Parse(bitsTmp[j]);
-                        }
+                        file.Permutations[j] = Int32.Parse(bitsTmp[j]);
+                    }
 
                     var T = file.T;
                     var M = file.M;
                     var P = file.P;
                     var permuttuans = file.Permutations;
 
+
+                    // Algorytm
+                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    {
+                        Array.BinarySearch(T, 1);
+                    }
                 }
+
             }
         }
     }
