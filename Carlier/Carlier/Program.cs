@@ -12,7 +12,7 @@ namespace Carlier
         {
             Carlier carlier = new Carlier();
 
-            carlier.Carlier_Run();
+            Console.WriteLine(carlier.Carlier_Run());
 
             Console.ReadKey();
         }

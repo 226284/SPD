@@ -12,16 +12,20 @@ namespace Carlier
         public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
         public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
         public int b;
-        public int c;
         public List<Task> Permutacje;
 
-        public Schrage(File file)
+        public Schrage(List<Task> file)
         {
-            foreach (var t in file.N)
+            ListToQueue(file);
+            Permutacje = new List<Task>();
+        }
+
+        public void ListToQueue(List<Task> tasks)
+        {
+            foreach (Task t in tasks)
             {
                 N.Enqueue(t, t.r);
             }
-            Permutacje = new List<Task>();
         }
 
         public int SchrageRun()
@@ -44,8 +48,6 @@ namespace Carlier
                 }
 
                 var x = G.First;
-                x.id = k;
-                Permutacje.Add(x);
                 G.Dequeue();
 
                 step = step + 1;

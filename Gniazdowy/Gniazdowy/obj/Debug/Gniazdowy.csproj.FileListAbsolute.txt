@@ -1,0 +1,7 @@
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\bin\Debug\Gniazdowy.exe.config
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\bin\Debug\Gniazdowy.exe
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\bin\Debug\Gniazdowy.pdb
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\obj\Debug\Gniazdowy.csprojResolveAssemblyReference.cache
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\obj\Debug\Gniazdowy.csproj.CoreCompileInputs.cache
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\obj\Debug\Gniazdowy.exe
+C:\Users\Michal\Documents\GitHub\SPD\Gniazdowy\Gniazdowy\obj\Debug\Gniazdowy.pdb

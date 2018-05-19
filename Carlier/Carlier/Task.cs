@@ -11,7 +11,6 @@ namespace Carlier
         public int r; //termin dostępności
         public int p; //czas obsługi
         public int q; //czas dostarczenia
-        public int id; //id o pozycji 
 
         public Task(int R, int P, int Q)
         {

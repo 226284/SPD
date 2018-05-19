@@ -12,9 +12,14 @@ namespace Carlier
         public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
         public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
 
-        public PreSchrage(File file)
+        public PreSchrage(List<Task> tasks)
         {
-            foreach (var t in file.N)
+            ListToQueue(tasks);
+        }
+
+        public void ListToQueue(List<Task> tasks)
+        {
+            foreach (Task t in tasks)
             {
                 N.Enqueue(t, t.r);
             }
