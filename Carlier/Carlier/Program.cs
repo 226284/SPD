@@ -10,11 +10,15 @@ namespace Carlier
     {
         static void Main(string[] args)
         {
-            Carlier carlier = new Carlier();
+            while (true)
+            {
+                Carlier carlier = new Carlier();
 
-            Console.WriteLine(carlier.Carlier_Run());
+                Console.WriteLine(carlier.Carlier_Run());
+                Console.WriteLine();
 
-            Console.ReadKey();
+                Console.ReadKey();
+            }
         }
     }
 }

@@ -48,8 +48,9 @@ namespace Carlier
                 }
 
                 var x = G.First;
-                G.Dequeue();
 
+                Task task = G.Dequeue();
+                Permutacje.Add(task);
                 step = step + 1;
                 //tTemp = time;
                 time = time + x.p;

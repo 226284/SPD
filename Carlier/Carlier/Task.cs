@@ -18,5 +18,19 @@ namespace Carlier
             p = P;
             q = Q;
         }
+
+        public override string ToString()
+        {
+            return "Task: r:" + r + " p:" + p  + " q:" + q;
+        }
+
+        public Task Clone()
+        {
+            Task task = new Task(0, 0, 0);
+            task.r = this.r;
+            task.p = this.p;
+            task.q = this.q;
+            return task;
+        }
     }
 }

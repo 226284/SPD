@@ -8,7 +8,6 @@ namespace Carlier
 {
     class Carlier
     {
-        public List<Task> opt; // optymalna permutacja
         public List<Task> act; // aktualna permutacja
         public int a, b, c;
         public int U, LB, UB;
@@ -26,25 +25,24 @@ namespace Carlier
 
         public int Carlier_Run()
         {
-            int cmax = 0;
             int rtmp;
             int qtmp;
 
             Schrage schrage = new Schrage(act);
-            var tmp = schrage.SchrageRun();
+            var tmp_cmax = schrage.SchrageRun();
             b = schrage.b;
 
-            if (tmp < UB)
+            act = schrage.Permutacje;
+
+            if (tmp_cmax < UB)
             {
-                opt = act;
-                UB = tmp;
-                Console.WriteLine("Checkpoint 1");
+                UB = tmp_cmax;
             }
 
             List<Task> tmp_act = new List<Task>();
             foreach (Task t in act)
             {
-                tmp_act.Add(t);
+                tmp_act.Add(t.Clone());
             }
 
             a = Find_a();
@@ -54,14 +52,12 @@ namespace Carlier
 
             if (c != 0)
             {
-                Console.WriteLine("Checkpoint 2");
-
                 rr = 100000000;
                 qq = 100000000;
                 pp = 0;
 
                 for (int i = c + 1; i <= b; i++)
-                { //tu wyznaczamy r', q', p' do nadpisywania
+                { //wyznaczamy r', q', p'
                     if (act[i].r < rr)
                     {
                         rr = act[i].r;
@@ -70,31 +66,48 @@ namespace Carlier
                     {
                         qq = act[i].q;
                     }
-                    pp += act[i].p;
+                    pp = pp + act[i].p;
                 }
-                rtmp = act[c].r; //nadpisuje r w zad int
-                act[c].r = (Math.Max(rtmp, rr + pp)); //podstawiamy r' w zadaniu interferencyjnym
-                PreSchrage preSchrage = new PreSchrage(act);
-                if (preSchrage.PreSchrageRun() < UB)
-                {
-                    Console.WriteLine("Checkpoint 3");
 
+                rtmp = act[c].r;
+                act[c].r = (Math.Max(rtmp, rr + pp));
+
+                List<Task> pre = new List<Task>();
+                foreach(Task t in act)
+                {
+                    pre.Add(t.Clone());
+                }
+                if (new PreSchrage(pre).PreSchrageRun() < UB)
+                {
                     Carlier_Run();
                 }
-                //przywracam aktualną permutację w iteracji
-                //Collections.copy(act, act);
-                qtmp = act[c].q; //nadpisuje q w zad int
-                act[c].q = Math.Max(qtmp, qq + pp); //podstawiamy q' w zadaniu interferencyjnym
-                if (new PreSchrage(act).PreSchrageRun() < UB)
-                {
-                    Console.WriteLine("Checkpoint 4");
 
+                foreach (Task t in tmp_act)
+                {
+                    act.Add(t.Clone());
+                }
+
+                qtmp = act[c].q;
+                act[c].q = Math.Max(qtmp, qq + pp);
+
+                List<Task> pre2 = new List<Task>();
+                foreach (Task t in act)
+                {
+                    pre.Add(t.Clone());
+                }
+
+                if (new PreSchrage(pre2).PreSchrageRun() < UB)
+                {
                     Carlier_Run();
                 }
-                //przywracam aktualną permutację w iteracji
-                //Collections.copy(act, act);
+
+                foreach(Task t in tmp_act)
+                {
+                    act.Add(t.Clone());
+                }
+
             }
-            return UB;            //algorytm Caliera zwraca optymalna liczbe permutacji
+            return UB;
         }
 
         public int Find_a()
