@@ -28,11 +28,25 @@ namespace Carlier
             int rtmp;
             int qtmp;
 
+
             Schrage schrage = new Schrage(act); //
             var tmp_cmax = schrage.SchrageRun();
             b = schrage.b;
+            Console.WriteLine("Schrage:  " + tmp_cmax);
 
+            foreach (Task t in act)
+            {
+                Console.WriteLine(t.ToString());
+            }
+            Console.WriteLine("cheeeeek");
+
+            act.Clear();
             act = schrage.Permutacje;
+
+            foreach (Task t in act)
+            {
+                Console.WriteLine(t.ToString());
+            }
 
             if (tmp_cmax < UB)
             {
@@ -82,6 +96,7 @@ namespace Carlier
                 {
                     Carlier_Run(); //rekt
                 }
+                act.Clear();
                 // Przywracanie
                 foreach (Task t in tmp_act)
                 {
@@ -98,11 +113,19 @@ namespace Carlier
                     pre2.Add(t.Clone());
                 }
                 Console.WriteLine("UB: "+UB);
-                if (new PreSchrage(pre2).PreSchrageRun() < UB)
+                var tmppp = new PreSchrage(pre2).PreSchrageRun();
+                foreach (Task t in pre2)
+                {
+                    Console.WriteLine(t.ToString());
+                }
+                
+                Console.WriteLine(tmppp.ToString());
+                if (tmppp < UB)
                 {
                     Console.WriteLine("Checkpoint 4");
                     Carlier_Run(); //rekt
                 }
+                act.Clear();
                 // Przywracanie
                 foreach(Task t in tmp_act)
                 {
