@@ -117,7 +117,7 @@ namespace Gniazdowy
                     int e;
                     int cmax = 0;
                     List<int> act = new List<int>();
-                    int count = 0;
+                    int flag = 0;
 
                     for (int i = 1; i <= file.NumberOfOperations; i++)
                     {
@@ -135,14 +135,24 @@ namespace Gniazdowy
 
                         if (T[e] != 0)
                         {
-                            if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); }
+                            if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); flag = 1; }
                         }
                         if (M[e] != 0)
                         {
-                            if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); }
+                            if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); flag = 1; }
                         }
                         Console.WriteLine(cmax);
                         cmax = Math.Max(cmax, c[e]);
+
+                        if(flag == 0)
+                        {
+                            q--;
+                        }
+                        else if(flag == 1)
+                        {
+                            flag = 0;
+                        }
+
                         if (act.Count == file.NumberOfOperations)
                         {
                             break;
@@ -151,9 +161,9 @@ namespace Gniazdowy
 
                     Console.WriteLine(cmax);
 
-                    foreach (Task t in data)
+                    foreach (int t in act)
                     {
-                        Console.WriteLine(t.id.ToString() + ": " + t.start.ToString() + " " + t.stop.ToString());
+                        Console.Write(t.ToString() + " ");
                     }
                 }
 
