@@ -34,7 +34,7 @@ namespace Gniazdowy
                     bitsTmp = tmp.Split(' ');
                     for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
-                        //T
+                        //Następnicy technologiczni
                         file.T[j] = Int32.Parse(bitsTmp[j - 1]);
                     }
 
@@ -42,7 +42,7 @@ namespace Gniazdowy
                     bitsTmp = tmp.Split(' ');
                     for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
-                        //M
+                        //Następnicy maszynowi
                         file.M[j] = Int32.Parse(bitsTmp[j - 1]);
                     }
 
@@ -50,7 +50,7 @@ namespace Gniazdowy
                     bitsTmp = tmp.Split(' ');
                     for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
-                        //P
+                        //Czas wykonywania operacji
                         file.P[j] = Int32.Parse(bitsTmp[j - 1]);
 
                     }
@@ -74,6 +74,7 @@ namespace Gniazdowy
                     var T = file.T;
                     var M = file.M;
                     var P = file.P;
+
                     var PM = new int[file.NumberOfOperations + 1];
                     for (int i = 1; i <= file.NumberOfOperations; i++)
                     {
@@ -109,52 +110,79 @@ namespace Gniazdowy
                         }
                     }
 
+                    int[] S = new int[file.NumberOfOperations+1];
+                    int[] C = new int[file.NumberOfOperations + 1];
+                    int cMax = 0;
+
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
+                    {
+                        if (LP[j]==0)
+                        {
+                            S[j] = 0;
+                            C[j] = P[j];
+                        }
+                    }
+
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
+                    {
+                        C[j] = Math.Max(C[PT[j]], C[PM[j]]) + P[j];
+                        S[j] = C[j] - P[j];
+                    }
+                    cMax = C.Max();
+
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
+                    {
+                        Console.WriteLine(S[j] + "  " + C[j]);
+                    }
+                    Console.WriteLine(cMax);
+
                     // tworzenie listy
-                    List<Task> data = new List<Task>();
+                    //List<Task> data = new List<Task>();
 
-                    int[] c = new int[file.NumberOfOperations + 1];
-                    int q = file.NumberOfOperations;
-                    int e;
-                    int cmax = 0;
-                    List<int> act = new List<int>();
-                    int count = 0;
+                    //int[] c = new int[file.NumberOfOperations + 1];
+                    //int q = file.NumberOfOperations;
+                    //int e;
+                    //int cmax = 0;
+                    //List<int> act = new List<int>();
+                    //int count = 0;
 
-                    for (int i = 1; i <= file.NumberOfOperations; i++)
-                    {
-                        if (LP[i] == 0)
-                        {
-                            act.Add(i);
-                        }
-                    }
+                    //for (int i = 1; i <= file.NumberOfOperations; i++)
+                    //{
+                    //    if (LP[i] == 0)
+                    //    {
+                    //        act.Add(i);
+                    //    }
+                    //}
 
-                    while (q != 0)
-                    {
-                        e = q;
+                    //while (q != 0)
+                    //{
+                    //    e = q;
 
-                        c[e] = Math.Max(c[PT[e]], c[PM[e]]) + P[e];
+                    //    c[e] = Math.Max(c[PT[e]], c[PM[e]]) + P[e];
 
-                        if (T[e] != 0)
-                        {
-                            if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); }
-                        }
-                        if (M[e] != 0)
-                        {
-                            if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); }
-                        }
-                        Console.WriteLine(cmax);
-                        cmax = Math.Max(cmax, c[e]);
-                        if (act.Count == file.NumberOfOperations)
-                        {
-                            break;
-                        }
-                    }
+                    //    if (T[e] != 0)
+                    //    {
+                    //        if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); }
+                    //    }
+                    //    if (M[e] != 0)
+                    //    {
+                    //        if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); }
+                    //    }
+                    //    //Console.WriteLine(cmax);
+                    //    cmax = Math.Max(cmax, c[e]);
+                    //    if (act.Count == file.NumberOfOperations)
+                    //    {
+                    //        break;
+                    //    }
+                    //}
 
-                    Console.WriteLine(cmax);
+                    // Console.WriteLine(cmax);
 
-                    foreach (Task t in data)
-                    {
-                        Console.WriteLine(t.id.ToString() + ": " + t.start.ToString() + " " + t.stop.ToString());
-                    }
+                    //foreach (Task t in data)
+                    //{
+                    //    Console.WriteLine(t.id.ToString() + ": " + t.start.ToString() + " " + t.stop.ToString());
+                    //}
+                    Console.ReadLine();
                 }
 
             }
