@@ -74,8 +74,22 @@ namespace Gniazdowy
                     var T = file.T;
                     var M = file.M;
                     var P = file.P;
-                    var permuttuans = file.Permutations;
-
+                    var PM = new int[file.NumberOfOperations];
+                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    {
+                        if (M[i] != 0)
+                        {
+                            PM[M[i]] = i;
+                        }
+                    }
+                    var PT = new int[file.NumberOfOperations];
+                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    {
+                        if (T[i] != 0)
+                        {
+                            PT[T[i]] = i;
+                        }
+                    }
 
                     // Algorytm gniazdowy
 
@@ -88,36 +102,37 @@ namespace Gniazdowy
                             {
                                 LP[i] = LP[i] + 1;
                             }
-                            if (M[j] == i + 1)
+                            if (M[j] == (i + 1))
                             {
                                 LP[i] = LP[i] + 1;
                             }
                         }
                     }
 
-                    // tworzenie kolejki
+                    // tworzenie listy
                     List<Task> data = new List<Task>();
 
-                    int k = 0;
-                    int nominal = 0;
-
-                    while (k < file.NumberOfOperations)
+                    int q = file.NumberOfOperations;
+                    int e;
+                    int cmax = 0;
+                    while (q != 0)
                     {
-                        if (LP[k] == 0)
+                        e = q - 1;
+
+                        cmax = Math.Max(PT[e], PM[e]) + P[e];
+
+                        if (T[e] != 0)
                         {
-                            Task tmpdata = new Task();
-                            tmpdata.start = nominal;
-                            tmpdata.stop = P[k] - nominal;
-                            data.Add(tmpdata);
+                            if (--LP[T[e]] == 0) { q = T[e]; }
                         }
-
-                        if (LP[k] == 1)
+                        if (M[e] != 0)
                         {
-
+                            if (--LP[M[e]] == 0) { q = M[e]; }
                         }
-
-                        k++;
+                        Console.WriteLine(cmax);
                     }
+
+                    Console.WriteLine(cmax);
 
                     foreach (Task t in data)
                     {
