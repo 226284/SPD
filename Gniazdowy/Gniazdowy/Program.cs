@@ -25,33 +25,33 @@ namespace Gniazdowy
                     string[] bitsTmp = tmp.Split(' ');
                     file.NumberOfOperations = Int32.Parse(bitsTmp[0]);
 
-                    file.T = new int[file.NumberOfOperations];
-                    file.M = new int[file.NumberOfOperations];
-                    file.P = new int[file.NumberOfOperations];
-                    int[] LP = new int[file.NumberOfOperations];
+                    file.T = new int[file.NumberOfOperations + 1];
+                    file.M = new int[file.NumberOfOperations + 1];
+                    file.P = new int[file.NumberOfOperations + 1];
+                    int[] LP = new int[file.NumberOfOperations + 1];
 
                     tmp = sr.ReadLine();
                     bitsTmp = tmp.Split(' ');
-                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
                         //T
-                        file.T[j] = Int32.Parse(bitsTmp[j]);
+                        file.T[j] = Int32.Parse(bitsTmp[j - 1]);
                     }
 
                     tmp = sr.ReadLine();
                     bitsTmp = tmp.Split(' ');
-                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
                         //M
-                        file.M[j] = Int32.Parse(bitsTmp[j]);
+                        file.M[j] = Int32.Parse(bitsTmp[j - 1]);
                     }
 
                     tmp = sr.ReadLine();
                     bitsTmp = tmp.Split(' ');
-                    for (int j = 0; j < file.NumberOfOperations; j++)
+                    for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
                         //P
-                        file.P[j] = Int32.Parse(bitsTmp[j]);
+                        file.P[j] = Int32.Parse(bitsTmp[j - 1]);
 
                     }
 
@@ -74,16 +74,16 @@ namespace Gniazdowy
                     var T = file.T;
                     var M = file.M;
                     var P = file.P;
-                    var PM = new int[file.NumberOfOperations];
-                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    var PM = new int[file.NumberOfOperations + 1];
+                    for (int i = 1; i <= file.NumberOfOperations; i++)
                     {
                         if (M[i] != 0)
                         {
                             PM[M[i]] = i;
                         }
                     }
-                    var PT = new int[file.NumberOfOperations];
-                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    var PT = new int[file.NumberOfOperations + 1];
+                    for (int i = 1; i <= file.NumberOfOperations; i++)
                     {
                         if (T[i] != 0)
                         {
@@ -94,15 +94,15 @@ namespace Gniazdowy
                     // Algorytm gniazdowy
 
                     // wyznaczenie LP (złożność n^2 :/)
-                    for (int i = 0; i < file.NumberOfOperations; i++)
+                    for (int i = 1; i <= file.NumberOfOperations; i++)
                     {
-                        for (int j = 0; j < file.NumberOfOperations; j++)
+                        for (int j = 1; j <= file.NumberOfOperations; j++)
                         {
-                            if (T[j] == (i + 1))
+                            if (T[j] == i)
                             {
                                 LP[i] = LP[i] + 1;
                             }
-                            if (M[j] == (i + 1))
+                            if (M[j] == i)
                             {
                                 LP[i] = LP[i] + 1;
                             }
@@ -112,24 +112,41 @@ namespace Gniazdowy
                     // tworzenie listy
                     List<Task> data = new List<Task>();
 
+                    int[] c = new int[file.NumberOfOperations + 1];
                     int q = file.NumberOfOperations;
                     int e;
                     int cmax = 0;
+                    List<int> act = new List<int>();
+                    int count = 0;
+
+                    for (int i = 1; i <= file.NumberOfOperations; i++)
+                    {
+                        if (LP[i] == 0)
+                        {
+                            act.Add(i);
+                        }
+                    }
+
                     while (q != 0)
                     {
-                        e = q - 1;
+                        e = q;
 
-                        cmax = Math.Max(PT[e], PM[e]) + P[e];
+                        c[e] = Math.Max(c[PT[e]], c[PM[e]]) + P[e];
 
                         if (T[e] != 0)
                         {
-                            if (--LP[T[e]] == 0) { q = T[e]; }
+                            if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); }
                         }
                         if (M[e] != 0)
                         {
-                            if (--LP[M[e]] == 0) { q = M[e]; }
+                            if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); }
                         }
                         Console.WriteLine(cmax);
+                        cmax = Math.Max(cmax, c[e]);
+                        if (act.Count == file.NumberOfOperations)
+                        {
+                            break;
+                        }
                     }
 
                     Console.WriteLine(cmax);
