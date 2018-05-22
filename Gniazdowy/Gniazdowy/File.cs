@@ -8,11 +8,11 @@ namespace Gniazdowy
 {
     class File
     {
-        public int NumberOfOperations;
-        public int[] T;
-        public int[] M;
-        public int[] P;
-        public int NumberOfMachines;
-        public int[] Permutations;
+        public int NumberOfOperations; //liczba operacji
+        public int[] T; //tablica następników technologicznych
+        public int[] M; //tablica następników maszynowych
+        public int[] P; //tablica czasów wykonywania się operacji
+        public int NumberOfMachines; //liczba maszyn
+        public int[] Permutations; //tablica przechowująca kolejność permutacji
     }
 }
