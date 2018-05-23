@@ -110,13 +110,13 @@ namespace Gniazdowy
                         }
                     }
 
-                    int[] S = new int[file.NumberOfOperations+1];
+                    int[] S = new int[file.NumberOfOperations + 1];
                     int[] C = new int[file.NumberOfOperations + 1];
                     int cMax = 0;
 
                     for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
-                        if (LP[j]==0)
+                        if (LP[j] == 0)
                         {
                             S[j] = 0;
                             C[j] = P[j];
