@@ -28,16 +28,12 @@ namespace Carlier
             int rtmp;
             int qtmp;
 
-            foreach (Task t in act)
-            {
-                Console.WriteLine(t.ToString());
-            }
+            Schrage schrage = new Schrage(act);
 
-            Schrage schrage = new Schrage(act); //
             var tmp_cmax = schrage.SchrageRun();
             b = schrage.b;
-            Console.WriteLine("Schrage:  " + tmp_cmax);
 
+            // aktualizacja aktualnej permutacji
             act.Clear();
             act = schrage.Permutacje;
 
@@ -47,10 +43,7 @@ namespace Carlier
             }
 
             List<Task> tmp_act = new List<Task>();
-            foreach (Task t in act)
-            {
-                tmp_act.Add(t.Clone());
-            }
+            Copy(tmp_act, act);
 
             a = Find_a();
             c = Find_c();
@@ -81,51 +74,26 @@ namespace Carlier
 
                 ///////////////////////////////////////////////////////////////////
                 List<Task> pre = new List<Task>();
-                foreach (Task t in act)
-                {
-                    pre.Add(t.Clone());
-                }
-                if (new PreSchrage(pre).PreSchrageRun() < UB) // here
-                {
-                    Carlier_Run(); //rekt
-                }
+                Copy(pre, act);
+
+                if (new PreSchrage(pre).PreSchrageRun() < UB) { Carlier_Run(); }
+
                 act.Clear();
-                // Przywracanie
-                foreach (Task t in tmp_act)
-                {
-                    act.Add(t.Clone());
-                }
+                Copy(act, tmp_act);
 
                 qtmp = act[c].q;
                 act[c].q = Math.Max(qtmp, (qq + pp));
 
-                //////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////
                 List<Task> pre2 = new List<Task>();
-                foreach (Task t in act)
-                {
-                    pre2.Add(t.Clone());
-                }
-                Console.WriteLine("UB: " + UB);
-                var tmppp = new PreSchrage(pre2).PreSchrageRun();  //here
-                foreach (Task t in act)
-                {
-                    Console.WriteLine(t.ToString());
-                }
+                Copy(pre2, act);
 
-                Console.WriteLine("PRE:  " + tmppp.ToString());
-                if (tmppp < UB)
-                {
-                    Console.WriteLine("Checkpoint 4");
-                    Carlier_Run(); //rekt
-                }
+                if (new PreSchrage(pre2).PreSchrageRun() < UB) { Carlier_Run(); }
+
                 act.Clear();
-                // Przywracanie
-                foreach (Task t in tmp_act)
-                {
-                    act.Add(t.Clone());
-                }
-
+                Copy(act, tmp_act);
             }
+
             return UB;
         }
 
@@ -164,6 +132,14 @@ namespace Carlier
                 }
             }
             return c;
+        }
+
+        public void Copy(List<Task> to, List<Task> from)
+        {
+            foreach (Task t in from)
+            {
+                to.Add(t.Clone());
+            }
         }
 
     }
