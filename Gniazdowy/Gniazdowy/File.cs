@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gniazdowy
 {
-    class File
+    public class File
     {
         public int NumberOfOperations; //liczba operacji
         public int[] T; //tablica następników technologicznych

@@ -10,7 +10,6 @@ namespace Gniazdowy
     {
         static void Main(string[] args)
         {
-
             while (true)
             {//tworzenie obiektu typu plik
                 File file = new File();
@@ -28,7 +27,7 @@ namespace Gniazdowy
                     file.T = new int[file.NumberOfOperations + 1];
                     file.M = new int[file.NumberOfOperations + 1];
                     file.P = new int[file.NumberOfOperations + 1];
-                    int[] LP = new int[file.NumberOfOperations + 1];
+                    //int[] LP = new int[file.NumberOfOperations + 1];
 
                     tmp = sr.ReadLine();
                     bitsTmp = tmp.Split(' ');
@@ -60,132 +59,45 @@ namespace Gniazdowy
                     bitsTmp = tmp.Split(' ');
                     file.NumberOfMachines = Int32.Parse(bitsTmp[0]);
 
-                    file.Permutations = new int[file.NumberOfOperations + file.NumberOfMachines];
+                    file.Permutations = new int[file.NumberOfOperations + file.NumberOfMachines + 1];
 
                     tmp = sr.ReadLine();
                     bitsTmp = tmp.Split(' ');
-                    for (int j = 0; j < file.NumberOfOperations + file.NumberOfMachines; j++)
+                    for (int j = 1; j <= file.NumberOfOperations + file.NumberOfMachines; j++)
                     {
                         //Permutacje
-
-                        file.Permutations[j] = Int32.Parse(bitsTmp[j]);
+                        file.Permutations[j] = Int32.Parse(bitsTmp[j-1]);
                     }
+                    ///////////////////KONIEC WCZYTYWANIA PLIKU//////////////////
 
-                    var T = file.T;
-                    var M = file.M;
-                    var P = file.P;
-
-                    var PM = new int[file.NumberOfOperations + 1];
-                    for (int i = 1; i <= file.NumberOfOperations; i++)
-                    {
-                        if (M[i] != 0)
-                        {
-                            PM[M[i]] = i;
-                        }
-                    }
-                    var PT = new int[file.NumberOfOperations + 1];
-                    for (int i = 1; i <= file.NumberOfOperations; i++)
-                    {
-                        if (T[i] != 0)
-                        {
-                            PT[T[i]] = i;
-                        }
-                    }
+                    Nested nested = new Nested(file);
 
                     // Algorytm gniazdowy
 
-                    // wyznaczenie LP (złożność n^2 :/)
-                    for (int i = 1; i <= file.NumberOfOperations; i++)
-                    {
-                        for (int j = 1; j <= file.NumberOfOperations; j++)
-                        {
-                            if (T[j] == i)
-                            {
-                                LP[i] = LP[i] + 1;
-                            }
-                            if (M[j] == i)
-                            {
-                                LP[i] = LP[i] + 1;
-                            }
-                        }
-                    }
+                    nested.Precursors();
 
-                    int[] S = new int[file.NumberOfOperations+1];
-                    int[] C = new int[file.NumberOfOperations + 1];
-                    int cMax = 0;
+                    nested.GetLP();
 
+
+                    do {
+                        nested.GetQueue();
+                    } while (nested.order.Count != nested.file.NumberOfOperations);
+
+                    nested.StartEnd();
+
+                    //WYPISYWANIE
                     for (int j = 1; j <= file.NumberOfOperations; j++)
                     {
-                        if (LP[j]==0)
-                        {
-                            S[j] = 0;
-                            C[j] = P[j];
-                        }
+                        Console.WriteLine(nested.S[j] + "  " + nested.C[j]);
                     }
+                    Console.WriteLine(nested.cMax);
 
-                    for (int j = 1; j <= file.NumberOfOperations; j++)
-                    {
-                        C[j] = Math.Max(C[PT[j]], C[PM[j]]) + P[j];
-                        S[j] = C[j] - P[j];
-                    }
-                    cMax = C.Max();
-
-                    for (int j = 1; j <= file.NumberOfOperations; j++)
-                    {
-                        Console.WriteLine(S[j] + "  " + C[j]);
-                    }
-                    Console.WriteLine(cMax);
-
-                    // tworzenie listy
-                    //List<Task> data = new List<Task>();
-
-                    //int[] c = new int[file.NumberOfOperations + 1];
-                    //int q = file.NumberOfOperations;
-                    //int e;
-                    //int cmax = 0;
-                    //List<int> act = new List<int>();
-                    //int count = 0;
-
-                    //for (int i = 1; i <= file.NumberOfOperations; i++)
-                    //{
-                    //    if (LP[i] == 0)
-                    //    {
-                    //        act.Add(i);
-                    //    }
-                    //}
-
-                    //while (q != 0)
-                    //{
-                    //    e = q;
-
-                    //    c[e] = Math.Max(c[PT[e]], c[PM[e]]) + P[e];
-
-                    //    if (T[e] != 0)
-                    //    {
-                    //        if (--LP[T[e]] == 0) { q = T[e]; act.Add(e); }
-                    //    }
-                    //    if (M[e] != 0)
-                    //    {
-                    //        if (--LP[M[e]] == 0) { q = M[e]; act.Add(e); }
-                    //    }
-                    //    //Console.WriteLine(cmax);
-                    //    cmax = Math.Max(cmax, c[e]);
-                    //    if (act.Count == file.NumberOfOperations)
-                    //    {
-                    //        break;
-                    //    }
-                    //}
-
-                    // Console.WriteLine(cmax);
-
-                    //foreach (Task t in data)
-                    //{
-                    //    Console.WriteLine(t.id.ToString() + ": " + t.start.ToString() + " " + t.stop.ToString());
-                    //}
                     Console.ReadLine();
                 }
 
             }
         }
+
+
     }
 }
