@@ -8,7 +8,7 @@ namespace Gniazdowy
 {
     public class Nested
     {
-        public File file = new File();
+        public File file;
        public Queue<int> order;
         public int[] PM;
         public int[] PT;
