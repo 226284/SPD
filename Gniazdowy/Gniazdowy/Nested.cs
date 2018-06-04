@@ -72,10 +72,12 @@ namespace Gniazdowy
             }
         }
 
+        //obliczanie kolejności wykonania zadań
         public void GetQueue()
         {
             List<int> qTmp = new List<int>();
 
+            ///////////////////////////////////////////
             for (int i = 1; i <= file.NumberOfOperations; i++)
             {
                 if (LP[i] == 0)
@@ -90,7 +92,9 @@ namespace Gniazdowy
 
                 }
             }
-
+            //Tutaj, jeśli zadanie nie ma poprzedników(lub ma, ale jest znana ich kolejność, i w tabeli LP jest 0)
+            //to dodawane jest zadanie do tablicy kolejnośći, kolejki order, oraz tymczasowej qTmp
+            ///////////////////////////////////////////////
             while (qTmp.Count != 0)
             {
                 for (int j = 1; j <= file.NumberOfOperations; j++)
@@ -102,8 +106,15 @@ namespace Gniazdowy
                 }
                 qTmp.RemoveAt(qTmp.Count - 1);
             }
+            //Tutaj, dopóki qTmp z ostatnio znalezionymi zadaniami bez poprzedników, które można ustawić w kolejności, 
+            //znajdywane jest dla danego zadania, kogo jest poprzednikiem technologicznym/maszynowym, i dla tego indeksu
+            //zostaje obniżona liczba poprzedników
+            ///////////////////////////////////////////////
         }
 
+        //obliczanie czasów startu oraz zakończenia zadań
+        //Wybiera wartość maksymalną, dla konkretnego zadania, i z jego poprzedników technologicznych/maszynowych wybiera tego, który
+        //później kończy i dolicza czas trwania operacji
         public void StartEnd()
         {
             int e;
@@ -112,10 +123,15 @@ namespace Gniazdowy
                 e = order.First();
                 C[e] = Math.Max(C[PT[e]], C[PM[e]]) + file.P[e];
                 order.Dequeue();
-                if (PT[e] != 0 && --LP[PT[e]] == 0)
-                    order.Enqueue(PT[e]);
-                if (PM[e] != 0 && --LP[PM[e]] == 0)
-                    order.Enqueue(PM[e]);
+                //Niepotrzebne
+                //if (PT[e] != 0 && --LP[PT[e]] == 0)
+                //{
+                //    order.Enqueue(PT[e]);
+                //}
+                //if (PM[e] != 0 && --LP[PM[e]] == 0)
+                //{
+                //    order.Enqueue(PM[e]);
+                //}
             }
 
             cMax = C[file.NumberOfOperations];
@@ -123,7 +139,9 @@ namespace Gniazdowy
             {
                 S[i] = Math.Max(C[PT[i]], C[PM[i]]);
                 if (C[i] > cMax)
+                {
                     cMax = C[i];
+                }
             }
         }
     }
