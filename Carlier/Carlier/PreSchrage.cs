@@ -11,7 +11,7 @@ namespace Carlier
     {
         public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
         public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
-
+        public int cMax;
         public PreSchrage(List<Task> tasks)
         {
             ListToQueue(tasks);
@@ -28,9 +28,10 @@ namespace Carlier
         public int PreSchrageRun()
         {
             //inicjacja wszystkich zmiennych
-            int time = 0, step = 0, cMax = 0;
-            Task e = new Task(0, 0, 0);
-            Task l = new Task(0, 0, 0);
+            int time = 0;
+            cMax = 0;
+            Task e = new Task(0, 0, 0,0);
+            Task l = new Task(0, 0, 0,0);
 
             while (G.Count != 0 || N.Count != 0)
             {
@@ -38,7 +39,6 @@ namespace Carlier
                 Label:
                 while (N.Count != 0 && N.First.r <= time)
                 {
-
                     e = N.First;
                     G.Enqueue(e, e.q);
                     N.Dequeue();
@@ -62,12 +62,9 @@ namespace Carlier
 
                 e = G.First;
 
-                //Console.WriteLine("G: " + G.First.q);
-                //Console.WriteLine("N: " + N.First.r);
-
                 G.Dequeue();
 
-                step = step + 1;
+                //step = step + 1;
                 l = e;
                 //tTemp = time;
                 time = time + e.p;

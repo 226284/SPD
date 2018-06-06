@@ -37,7 +37,9 @@ namespace Carlier
                         p = int.Parse(bits[1]);
                         q = int.Parse(bits[2]);
 
-                        Task task = new Task(r, p, q);
+                        
+
+                        Task task = new Task(r, p, q,j);
 
                         listOfTasks.Add(task);
                         //Console.WriteLine(file.listOfTasks.Last().r.ToString() + " " + file.listOfTasks.Last().p.ToString());

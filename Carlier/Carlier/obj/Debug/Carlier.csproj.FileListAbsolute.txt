@@ -9,3 +9,14 @@ C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\bin\Debug\Priority Queue.xm
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.exe
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.pdb
 C:\Users\Michal\Documents\GitHub\SPD\Carlier\Carlier\obj\Debug\Carlier.csproj.CopyComplete
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Carlier.exe.config
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Carlier.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Carlier.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Priority Queue.dll
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Priority Queue.pdb
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\bin\Debug\Priority Queue.xml
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\obj\Debug\Carlier.csprojResolveAssemblyReference.cache
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\obj\Debug\Carlier.csproj.CoreCompileInputs.cache
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\obj\Debug\Carlier.csproj.CopyComplete
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\obj\Debug\Carlier.exe
+C:\Users\Jakub Woszczyna\Desktop\VI semestr\SPDmoje\Carlier\SPD\Carlier\Carlier\obj\Debug\Carlier.pdb

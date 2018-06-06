@@ -12,11 +12,15 @@ namespace Carlier
         public int p; //czas obsługi
         public int q; //czas dostarczenia
 
-        public Task(int R, int P, int Q)
+        public int C;
+        public int id;
+
+        public Task(int R, int P, int Q, int i)
         {
             r = R;
             p = P;
             q = Q;
+            id = i;
         }
 
         public override string ToString()
@@ -26,7 +30,7 @@ namespace Carlier
 
         public Task Clone()
         {
-            Task task = new Task(0, 0, 0);
+            Task task = new Task(0, 0, 0,0);
             task.r = this.r;
             task.p = this.p;
             task.q = this.q;

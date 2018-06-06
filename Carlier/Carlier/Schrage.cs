@@ -11,13 +11,15 @@ namespace Carlier
     {
         public SimplePriorityQueue<Task> N = new SimplePriorityQueue<Task>();
         public SimplePriorityQueue<Task> G = new SimplePriorityQueue<Task>(new Comparison<float>((i1, i2) => i2.CompareTo(i1)));
-        public int b;
-        public List<Task> Permutacje;
+        public List<Task> listOfTasks = new List<Task>();
+        //public List<Task> Permutacje;
+        public int cMax;
 
         public Schrage(List<Task> file)
         {
             ListToQueue(file);
-            Permutacje = new List<Task>();
+            listOfTasks = file;
+            //Permutacje = new List<Task>();
         }
 
         public void ListToQueue(List<Task> tasks)
@@ -31,7 +33,8 @@ namespace Carlier
         public int SchrageRun()
         {
             //N = file.N;
-            int time = 0, step = 0, cMax = 0, tTemp = 0, k = 0;
+            int time = 0, k = 0;
+            cMax = 0;
             while (G.Count != 0 || N.Count != 0)
             {
                 Label:
@@ -47,22 +50,23 @@ namespace Carlier
                     goto Label;
                 }
 
-                var x = G.First;
+                listOfTasks[k] = G.First;
+                time = time + G.First.p;
 
-                Task task = G.Dequeue();
-                Permutacje.Add(task);
-                step = step + 1;
-                //tTemp = time;
-                time = time + x.p;
-                cMax = Math.Max(cMax, time + x.q);
+                cMax = Math.Max(cMax, time + G.First.q);
+                G.Dequeue();
+
+                //Permutacje.Add(task);
+                listOfTasks[k].C = time;
+
+                k++;
 
                 // wyznaczenie b - końca ścieżki krytyczniej
-                if (cMax <= time + x.q)
-                {
-                    cMax = time + x.q;
-                    b = k;
-                }
-                k++;
+                //if (cMax <= time + x.q)
+                //{
+                //    cMax = time + x.q;
+                //    b = k;
+                //}
             }
             return cMax;
         }
